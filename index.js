@@ -48,9 +48,11 @@ function bindEvent() {
     }
 }
 
+//初始化
 function init() {
     minesNum = mineOver = 10;
     score.innerHTML = mineOver;
+    //生成棋盘
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
             let con = document.createElement('div');
@@ -63,7 +65,7 @@ function init() {
         }
     }
     block = document.getElementsByClassName('block');
-
+    //随机加入雷
     while (minesNum) {
         let mineIndex = Math.floor(Math.random() * 100);
         if (mineMap[mineIndex].mine == 0) {
@@ -74,8 +76,12 @@ function init() {
     }
 }
 
+//点击左键
 function leftClick(dom){
     let isLei = document.getElementsByClassName('isLei');
+    if(dom.classList.contains('flag')){ //遇到有标记不处理
+        return;
+    }
     //点到雷
     if(dom && dom.classList.contains('isLei')){
         for(let i = 0; i < isLei.length; i++){
@@ -119,6 +125,7 @@ function leftClick(dom){
     }
 }
 
+//点击右键
 function rightClick(dom){
     if(dom.classList.contains('num')){
         return;
